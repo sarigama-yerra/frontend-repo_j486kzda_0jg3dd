@@ -20,7 +20,7 @@ export default function Hero() {
       {/* Gold glow gradient */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(234,179,8,0.15),transparent_40%),radial-gradient(ellipse_at_bottom_left,rgba(234,179,8,0.12),transparent_40%)]" />
 
-      {/* 3D Coffee Cup Scene */}
+      {/* 3D Coffee Bean Scene */}
       <div
         className="absolute inset-0 flex items-center justify-center"
         style={{ perspective: 1000 }}
@@ -31,12 +31,12 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.94, rotateX: 0, rotateY: 0 }}
           animate={{ opacity: 1, scale: 1, y: [0, -12, 0] }}
           transition={{ duration: 0.9, ease: 'easeOut', y: { duration: 4.5, repeat: Infinity, ease: 'easeInOut' } }}
-          whileHover={{ scale: 1.02 }}
+          whileHover={{ scale: 1.03 }}
           style={{ transformStyle: 'preserve-3d', rotateX: tilt.x, rotateY: tilt.y }}
           aria-hidden
           className="relative"
         >
-          {/* Soft halo behind cup */}
+          {/* Soft halo behind bean */}
           <div className="absolute -inset-24 rounded-full bg-yellow-500/10 blur-3xl" style={{ transform: 'translateZ(-60px)' }} />
 
           {/* Ground shadow */}
@@ -47,57 +47,69 @@ export default function Hero() {
             transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
           />
 
-          {/* Coffee Cup (pseudo-3D with shading) */}
-          <svg width="560" height="520" viewBox="0 0 560 520" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-[0_0_40px_rgba(234,179,8,0.14)]" style={{ transform: 'translateZ(40px)' }}>
+          {/* Central 3D Coffee Bean */}
+          <svg
+            width="560"
+            height="520"
+            viewBox="0 0 560 520"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="drop-shadow-[0_0_40px_rgba(234,179,8,0.14)]"
+            style={{ transform: 'translateZ(40px)' }}
+          >
             <defs>
-              <radialGradient id="rimGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(280 160) rotate(90) scale(40 140)">
-                <stop offset="0%" stopColor="#FDE68A" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#FDE68A" stopOpacity="0" />
-              </radialGradient>
-              <linearGradient id="cupBody" x1="120" y1="240" x2="440" y2="360">
-                <stop offset="0%" stopColor="#111111" />
-                <stop offset="50%" stopColor="#0b0b0b" />
-                <stop offset="100%" stopColor="#0a0a0a" />
+              <linearGradient id="beanSkin" x1="120" y1="140" x2="440" y2="380" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#6b4e3d" />
+                <stop offset="45%" stopColor="#3f2c22" />
+                <stop offset="100%" stopColor="#2a1f1a" />
               </linearGradient>
+              <radialGradient id="spec" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(220 210) rotate(20) scale(120 180)">
+                <stop offset="0%" stopColor="#ffffff" stopOpacity="0.18" />
+                <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+              </radialGradient>
               <linearGradient id="goldEdge" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stopColor="#FDE68A" />
                 <stop offset="100%" stopColor="#F59E0B" />
               </linearGradient>
-              <linearGradient id="coffeeSurface" x1="160" y1="150" x2="400" y2="190">
-                <stop offset="0%" stopColor="#4b352d" />
-                <stop offset="100%" stopColor="#2a1f1f" />
-              </linearGradient>
             </defs>
 
-            {/* Saucer (3D ring) */}
-            <ellipse cx="280" cy="380" rx="190" ry="34" fill="url(#goldEdge)" fillOpacity="0.12" />
-            <ellipse cx="280" cy="380" rx="140" ry="22" fill="#0b0b0b" stroke="#EAB308" strokeOpacity="0.25" />
+            {/* Outer bean silhouette with subtle gold rim */}
+            <path
+              d="M170 150c60-48 160-48 220 0 60 48 60 172 0 220s-160 48-220 0-60-172 0-220z"
+              fill="url(#beanSkin)"
+              stroke="url(#goldEdge)"
+              strokeOpacity="0.5"
+              strokeWidth="2"
+            />
 
-            {/* Cup body */}
-            <path d="M150 200h260c8 0 14 6 14 14v100c0 70-58 128-128 128h-32c-70 0-128-58-128-128V214c0-8 6-14 14-14z" fill="url(#cupBody)" stroke="#EAB308" strokeOpacity="0.55" strokeWidth="2" />
+            {/* Crease (center seam) */}
+            <path
+              d="M270 150c-24 40-28 78-28 112 0 40 10 78 30 112"
+              stroke="#1f1511"
+              strokeOpacity="0.7"
+              strokeWidth="8"
+              strokeLinecap="round"
+            />
+            <path
+              d="M290 150c-24 40-28 78-28 112 0 40 10 78 30 112"
+              stroke="#2b1d18"
+              strokeOpacity="0.9"
+              strokeWidth="4"
+              strokeLinecap="round"
+            />
 
-            {/* Vertical sheen for 3D effect */}
-            <path d="M186 210c-14 0-26 66-26 104s10 68 26 68c30 0 54-77 54-172-20 0-40 0-54 0z" fill="#ffffff" fillOpacity="0.04" />
+            {/* Specular highlight */}
+            <ellipse cx="230" cy="210" rx="90" ry="60" fill="url(#spec)" />
 
-            {/* Coffee surface (top ellipse) */}
-            <ellipse cx="280" cy="200" rx="130" ry="28" fill="url(#coffeeSurface)" />
-            <ellipse cx="280" cy="200" rx="130" ry="28" stroke="#FDE68A" strokeOpacity="0.4" />
-            <ellipse cx="280" cy="200" rx="120" ry="20" fill="url(#rimGlow)" />
-
-            {/* Handle with inner shadow */}
-            <path d="M426 252c50 0 88 32 88 72s-38 72-88 72c-9 0-16-7-16-16s7-16 16-16c32 0 56-20 56-40s-24-40-56-40c-9 0-16-7-16-16s7-16 16-16z" fill="#0a0a0a" stroke="#EAB308" strokeOpacity="0.55" strokeWidth="2" />
-
-            {/* Steam (animated by overlayed motion paths using foreignObject wrapper) */}
+            {/* Tiny gold glints on edges */}
+            <circle cx="210" cy="168" r="3" fill="#FDE68A" fillOpacity="0.8" />
+            <circle cx="396" cy="336" r="2" fill="#FDE68A" fillOpacity="0.9" />
           </svg>
 
-          {/* Animated Steam Wisps */}
-          <svg width="560" height="240" viewBox="0 0 560 240" className="absolute left-1/2 top-[6%] -translate-x-1/2" style={{ pointerEvents: 'none', transform: 'translateZ(50px)' }}>
-            <motion.path d="M240 160c-12-22 12-26 6-42-6-16-30-18-20-42 8-18 30-22 40-42" stroke="#FDE68A" strokeOpacity="0.95" strokeWidth="3" strokeLinecap="round" fill="none" initial={{ opacity: 0, pathLength: 0, y: 10 }} animate={{ opacity: [0, 1, 1, 0], pathLength: [0, 1], y: [-8, -20] }} transition={{ duration: 3.6, repeat: Infinity, ease: 'easeInOut' }} />
-            <motion.path d="M280 160c-10-20 10-24 5-38-5-14-24-16-16-36 6-16 26-18 32-34" stroke="#FACC15" strokeOpacity="0.95" strokeWidth="3" strokeLinecap="round" fill="none" initial={{ opacity: 0, pathLength: 0, y: 10 }} animate={{ opacity: [0, 1, 1, 0], pathLength: [0, 1], y: [-10, -22] }} transition={{ duration: 3.9, repeat: Infinity, ease: 'easeInOut', delay: 0.25 }} />
-            <motion.path d="M320 160c-10-18 10-22 5-34-5-12-22-14-14-30 6-14 24-16 28-30" stroke="#EAB308" strokeOpacity="0.95" strokeWidth="3" strokeLinecap="round" fill="none" initial={{ opacity: 0, pathLength: 0, y: 10 }} animate={{ opacity: [0, 1, 1, 0], pathLength: [0, 1], y: [-12, -24] }} transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }} />
-          </svg>
+          {/* Orbiting ring with mini beans */}
+          <OrbitingRing />
 
-          {/* Coffee-related floating elements */}
+          {/* Ambient details */}
           <FloatingBeans />
           <Sparkles />
         </motion.div>
@@ -159,6 +171,43 @@ export default function Hero() {
         </div>
       </div>
     </section>
+  );
+}
+
+function OrbitingRing() {
+  return (
+    <div className="absolute left-1/2 top-[38%] -translate-x-1/2" style={{ transform: 'translateZ(20px)' }}>
+      <motion.div
+        className="relative w-[520px] h-[520px]"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
+        aria-hidden
+      >
+        {/* subtle ring */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[460px] h-[460px] rounded-full border border-yellow-500/10" />
+        {/* mini beans along the ring */}
+        <RingBean angle={0} />
+        <RingBean angle={72} />
+        <RingBean angle={144} />
+        <RingBean angle={216} />
+        <RingBean angle={288} />
+      </motion.div>
+    </div>
+  );
+}
+
+function RingBean({ angle = 0 }) {
+  const radius = 230;
+  const rad = (angle * Math.PI) / 180;
+  const x = Math.cos(rad) * radius;
+  const y = Math.sin(rad) * radius * 0.6; // slight ellipse for perspective
+  return (
+    <div
+      className="absolute"
+      style={{ left: `calc(50% + ${x}px)`, top: `calc(50% + ${y}px)`, transform: `translate(-50%, -50%)` }}
+    >
+      <BeanSVG size={20} />
+    </div>
   );
 }
 
